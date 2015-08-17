@@ -903,6 +903,17 @@ aarch64*-*-elf)
 	done
 	TM_MULTILIB_CONFIG=`echo $TM_MULTILIB_CONFIG | sed 's/^,//'`
 	;;
+
+aarch64*-*-dragonfly*)
+	tm_file="${tm_file} dbxelf.h elfos.h"
+	tm_file="${tm_file} ${dfly_tm_file} aarch64/aarch64-elf.h aarch64/aarch64-dragonfly.h"
+	tmake_file="${tmake_file} aarch64/t-aarch64 aarch64/t-aarch64-dragonfly"
+	case $target in
+	aarch64_be-*)
+		tm_defines="${tm_defines} TARGET_BIG_ENDIAN_DEFAULT=1"
+		;;
+	esac
+	;;
 aarch64*-*-linux*)
 	tm_file="${tm_file} dbxelf.h elfos.h gnu-user.h linux.h glibc-stdint.h"
 	tm_file="${tm_file} aarch64/aarch64-elf.h aarch64/aarch64-linux.h"
